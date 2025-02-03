@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAeOH Music Library</title>
+    <style>
+        :root {
+            --main-bg: #0a0a0a;
+            --accent-purple: #9b59b6;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Reset body padding and margin */
+        body {
+            background: var(--main-bg);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0; /* Remove padding */
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0; /* Ensure it starts from the left edge */
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Adjusted library-header margin */
+        .library-header {
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            margin-top: 80px; /* Adjusted for fixed header */
+        }
+
+        .vtuber-title {
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            text-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+        }
+
+        .song-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem; /* Add padding to prevent content from touching edges */
+        }
+
+        .song-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+            border: 1px solid #2d1433;
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+        }
+
+        .song-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+        }
+
+        .album-link {
+            display: block;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .album-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .album-link:hover .album-art {
+            transform: scale(1.1);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 20, 51, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .album-link:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-icon {
+            font-size: 3rem;
+            color: var(--accent-purple);
+            text-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
+        }
+
+        .song-info {
+            padding: 1rem;
+            text-align: center;
+            flex: 1; /* Allow the info section to grow and fill space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space out content evenly */
+            min-height: 120px; /* Set a minimum height for consistency */
+            }
+
+        .song-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            white-space: nowrap; /* Prevent text from wrapping */
+            overflow: hidden; /* Hide overflow */
+            text-overflow: ellipsis; /* Add ellipsis for long text */
+        }
+
+        .song-artist {
+            color: var(--accent-purple);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .song-duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
+            margin: 2rem auto;
+            display: block;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-purple);
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">TAeOH テオ 📸</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="song.html">Songs</a>
+            <a href="merch.html">Merchandise</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
+
+    <div class="library-header">
+        <h1 class="vtuber-title">🎵 TAeOH Music Library</h1>
+        <input type="text" class="search-bar" placeholder="Search songs...">
+    </div>
+
+    <div class="song-grid">
+        <!-- Song 1 -->
+        <div class="song-card">
+            <a href="https://youtu.be/A85lgJWrrs0" class="album-link" target="_blank">
+                <img src="images/Song_1.jpg" alt="Song Cover" class="album-art">
+                <div class="play-overlay">
+                    <span class="play-icon">▶</span>
+                </div>
+            </a>
+            <div class="song-info">
+                <div class="song-title">〖歌ってみた〗千本桜(Senbonzakura)</div>
+                <div class="song-artist">Hermes</div>
+                <div class="song-duration">4:02</div>
+            </div>
+        </div>
+
+        <!-- Song 2 -->
+        <div class="song-card">
+            <a href="https://www.youtube.com/watch?v=LPuv0kuqunQ" class="album-link" target="_blank">
+                <img src="images/Song_2.jpg" alt="Song Cover" class="album-art">
+                <div class="play-overlay">
+                    <span class="play-icon">▶</span>
+                </div>
+            </a>
+            <div class="song-info">
+                <div class="song-title">〖歌ってみた〗Ruby love</div>
+                <div class="song-artist">Marsces</div>
+                <div class="song-duration">3:08</div>
+            </div>
+        </div>
+        <!-- Song 3 -->
+        <div class="song-card">
+            <a href="https://www.youtube.com/watch?v=UqPC4L_EG2M" class="album-link" target="_blank">
+                <img src="images/Song_3.jpg" alt="Song Cover" class="album-art">
+                <div class="play-overlay">
+                    <span class="play-icon">▶</span>
+                </div>
+            </a>
+            <div class="song-info">
+                <div class="song-title">〖歌ってみた〗Apple (thai ver.)</div>
+                <div class="song-artist">TAeOH</div>
+                <div class="song-duration">3:31</div>
+            </div>
+        </div>
+
+        <!-- Song 4 -->
+        <div class="song-card">
+            <a href="https://www.youtube.com/watch?v=nQz0jPPVwTU" class="album-link" target="_blank">
+                <img src="images/Song_4.jpg" alt="Song Cover" class="album-art">
+                <div class="play-overlay">
+                    <span class="play-icon">▶</span>
+                </div>
+            </a>
+            <div class="song-info">
+                <div class="song-title">〖歌ってみた/cover〗 会いたくて会いたくて</div>
+                <div class="song-artist">TAeOH</div>
+                <div class="song-duration">4:42</div>
+            </div>
+        </div>
+        <!-- Song 5 -->
+        <div class="song-card">
+            <a href="https://www.youtube.com/watch?v=YGCjMSt872w" class="album-link" target="_blank">
+                <img src="images/Song_5.jpg" alt="Song Cover" class="album-art">
+                <div class="play-overlay">
+                    <span class="play-icon">▶</span>
+                </div>
+            </a>
+            <div class="song-info">
+                <div class="song-title">〖歌ってみた〗Love forever </div>
+                <div class="song-artist">TAeOH ft. Ushivaca</div>
+                <div class="song-duration">5:51</div>
+            </div>
+        </div>
+        <!-- Song 6 -->
+        <div class="song-card">
+            <a href="https://www.youtube.com/watch?v=1AtgpVk6YV4" class="album-link" target="_blank">
+                <img src="images/Song_6.jpg" alt="Song Cover" class="album-art">
+                <div class="play-overlay">
+                    <span class="play-icon">▶</span>
+                </div>
+            </a>
+            <div class="song-info">
+                <div class="song-title">〖〖歌ってみた〗夜に溺れる </div>
+                <div class="song-artist">TAeOH</div>
+                <div class="song-duration">3:52</div>
+            </div>
+        </div>
+        <!-- Add more song cards as needed -->
+    </div>
+
+    <script>
+         // Enhanced search functionality for song titles only
+    document.querySelector('.search-bar').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.song-card').forEach(card => {
+            const title = card.querySelector('.song-title').textContent.toLowerCase();
+            card.style.display = title.includes(searchTerm) ? 'block' : 'none';
+        });
+    });
+    </script>
+</body>
+</html>

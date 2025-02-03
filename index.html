@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurpleVTuber</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #9b59b6;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #9b59b6;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #2d1433, #491a54);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeUp 1s 0.2s ease backwards;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background: #9b59b6;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            animation: fadeUp 1s 0.4s ease backwards;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 5rem 5%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #9b59b6;
+        }
+
+        /* Merchandise Grid */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .merch-item {
+            background: #2d2d2d;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .merch-item:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Music List */
+        .song-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .song-item {
+            padding: 1.5rem;
+            background: #2d2d2d;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .song-item:hover {
+            transform: translateX(10px);
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating VTuber Image */
+        .vtuber-image {
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">TAeOH テオ 📸</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="song.html">Songs</a>
+            <a href="merch.html">Merchandise</a>
+            <a href="about.html">About</a>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="hero-overlay"></div>
+        <div class="particles" id="particles"></div>
+        
+        <div class="hero-content">
+            <div class="title-wrapper">
+                <h1 class="reveal-text">TAeOH テオ 📸🤭 Vtuber</h1>
+            </div>
+            <p class="slide-up-text">คุณพร้อมเป็นส่วนหนึ่งในเรื่องราวของผมหรือยังครับ? 🤭</p>
+            <a href="https://www.youtube.com/c/TAeOH" target="_blank" class="cta-button glitch-button">My channel</a>
+        </div>
+    </section>
+
+    <section class="section" id="songs">
+        <h2 class="section-title" style="text-align: center">Latest Song</h2>
+        <div class="song-list">
+            <!-- Song items will be dynamically generated -->
+        </div>
+    </section>
+
+    <section class="section" id="merch">
+        <h2 class="section-title" style="text-align: center">Merchandise</h2>
+        <div class="merch-grid">
+            <div class="merch-card">
+                <div class="image-container">
+                    <img src="images/Merch_1.jpg" alt="Hoodie" class="merch-image">
+                </div>
+                <div class="merch-info">
+                    <h3 class="merch-name">Badge</h3>
+                    <p class="merch-price">$49.99</p>
+                    <button class="shop-button">Buy Now</button>
+                </div>
+            </div>
+            <div class="merch-card">
+                <div class="image-container">
+                    <img src="images/Merch_2.jpg" alt="T-Shirt" class="merch-image">
+                </div>
+                <div class="merch-info">
+                    <h3 class="merch-name">Card</h3>
+                    <p class="merch-price">$29.99</p>
+                    <button class="shop-button">Buy Now</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script>
+        
+        // Intersection Observer for section animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+     document.querySelectorAll('.glitch-button').forEach(button => {
+        button.setAttribute('data-text', button.textContent);
+    });
+    
+    // Add intersection observer for text animations
+    const textObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    });
+    
+    document.querySelectorAll('.reveal-text, .slide-up-text').forEach(el => {
+        textObserver.observe(el);
+    });
+    const songs = [
+    {
+        title: "〖歌ってみた〗千本桜(Senbonzakura) ►Hermes",
+        artist: "Hermes",
+        duration: "3:45",
+        youtubeId: "A85lgJWrrs0",
+        cover: "images/Song_1.jpg"
+    },
+    {
+            title: "Ruby love",
+            artist: "Marsces",
+            duration: "3:09",
+            youtubeId: "LPuv0kuqunQ",
+            cover: "images/Song_2.jpg"
+        },
+    {
+            title: "〖歌ってみた〗Apple (thai ver.)",
+            artist: "TAeOH◄",
+            duration: "3:31",
+            youtubeId: "UqPC4L_EG2M",
+            cover: "images/Song_3.jpg"
+        },
+    // Add more songs here
+];
+
+const songList = document.querySelector('.song-list');
+
+songs.forEach(song => {
+    const songItem = document.createElement('div');
+    songItem.className = 'song-item';
+    songItem.innerHTML = `
+        <div class="album-art">
+            <img src="${song.cover}" alt="${song.title}">
+        </div>
+        <div class="song-info">
+            <span class="song-title">${song.title}</span>
+            <span class="song-artist">${song.artist}</span>
+            <span class="song-duration">${song.duration}</span>
+        </div>
+        <button class="play-button" data-yt="${song.youtubeId}"></button>
+    `;
+    
+    songItem.addEventListener('click', function(e) {
+        if(!e.target.classList.contains('play-button')) {
+            window.open(`https://www.youtube.com/watch?v=${song.youtubeId}`, '_blank');
+        }
+    });
+
+    songList.appendChild(songItem);
+});
+
+document.querySelectorAll('.play-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const ytId = this.dataset.yt;
+        window.open(`https://www.youtube.com/watch?v=${ytId}`, '_blank');
+    });
+});
+
+    </script>
+</body>
+</html>

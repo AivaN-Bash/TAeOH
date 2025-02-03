@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TAeOH</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Header (Menu) - Same as Vtuber 1 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: #9b59b6;
+            font-weight: 700;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #9b59b6;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Vtuber Hero Section */
+        .vtuber-hero {
+            height: 100vh;
+            background: linear-gradient(45deg, #2d1433, #491a54);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+            animation: fadeIn 1s ease-out, gradientShift 10s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .vtuber-hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideUp 0.8s ease forwards;
+            background: linear-gradient(45deg, #9b59b6, #e0b0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vtuber-hero p {
+            font-size: 1.5em;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeUp 1s 0.2s ease backwards;
+        }
+
+        .vtuber-image {
+            width: 400px;
+            margin-top: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Timeline Section */
+        .timeline-container {
+            max-width: 800px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #9b59b6;
+            transform: translateX(-35%);
+            animation: drawLine 2s ease-out forwards;
+        }
+
+        @keyframes drawLine {
+            0% { height: 0; }
+            100% { height: 100%; }
+        }
+
+        .timeline-item {
+            background: rgba(45, 45, 45, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+            width: 45%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) {
+            margin-right: 55%;
+        }
+
+        .timeline-item.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Feature Grid Section */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+
+        .feature-card {
+            background: rgba(45, 45, 45, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-card.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (Menu) - Same as Vtuber 1 -->
+    <header>
+        <div class="logo">TAeOH テオ 📸</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="song.html">Songs</a>
+            <a href="merch.html">Merchandise</a>
+            <a href="about.html" style="color: #9b59b6;">About</a>
+        </nav>
+    </header>
+
+    <!-- Vtuber Hero Section -->
+    <section class="vtuber-hero">
+        <div class="hero-content">
+            <h1>About TAeOH</h1>
+            <p>คุณพร้อมเป็นส่วนหนึ่งในเรื่องราวของผมหรือยังครับ? 🤭</p>
+            <img src="images/vtuber-about.png" alt="TAeOH Model" class="vtuber-image">
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        
+        <div class="timeline-item">
+            <h3>2021 - </h3>
+            <p>First </p>
+            <div class="feature-icon"></div>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2022 - </h3>
+            <p>Full-</p>
+            <div class="feature-icon"></div>
+        </div>
+
+        <div class="timeline-item">
+            <h3>2023 - </h3>
+            <p>interaction</p>
+            <div class="feature-icon"></div>
+        </div>
+    </div>
+
+    <!-- Feature Grid Section -->
+    <h2 style="text-align: center; margin: 50px 0;">Key Features</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>1</h3>
+            <p>Advanced </p>
+            <div class="feature-icon"></div>
+        </div>
+        <div class="feature-card">
+            <h3>2</h3>
+            <p>interaction</p>
+            <div class="feature-icon"></div>
+        </div>
+        <div class="feature-card">
+            <h3>3</h3>
+            <p>fish</p>
+            <div class="feature-icon"></div>
+        </div>
+    </div>
+
+    <script>
+        // Timeline animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const featureCards = document.querySelectorAll('.feature-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        timelineItems.forEach(item => observer.observe(item));
+        featureCards.forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
