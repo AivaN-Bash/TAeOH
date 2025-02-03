@@ -22,13 +22,13 @@ html, body {
 }
 
 /* Header */
+/* Header Styles */
 header {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     padding: 1rem 5%;
-    background: var(--header-bg);
+    background: rgba(26, 26, 26, 0.95);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
@@ -37,6 +37,87 @@ header {
     animation: slideDown 0.5s ease;
 }
 
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 2rem;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 5%;
+    }
+    
+    .hamburger {
+        display: block;
+        z-index: 1001;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(26, 26, 26, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    
+    nav.active {
+        max-height: 500px;
+    }
+    
+    nav a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        margin: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    nav a:last-child {
+        border-bottom: none;
+    }
+}
 .logo {
     font-size: 1.5rem;
     color: var(--accent-purple);
