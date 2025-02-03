@@ -393,3 +393,32 @@ nav a:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
 }
+/* Header Responsive Fixes */
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 60px; /* Match header height */
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 26, 0.98);
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    nav.active {
+        max-height: 100vh;
+        padding: 1rem 0;
+    }
+
+    nav a {
+        padding: 1.2rem 0;
+        margin: 0;
+    }
+}
+
+/* Ensure header stays on top */
+header {
+    z-index: 1000;
+}

@@ -178,6 +178,11 @@
     <!-- Header -->
     <header>
         <div class="logo">TAeOH テオ 📸</div>
+        <button class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <nav>
             <a href="index.html">Home</a>
             <a href="song.html">Songs</a>
@@ -212,5 +217,30 @@
         </div>
         <!-- Add more merch items -->
     </div>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('nav');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    nav.classList.toggle('active');
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!header.contains(e.target)) {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+    }
+});
+
+// Close menu after clicking a link
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+    });
+});
+    </script>
 </body>
 </html>

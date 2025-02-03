@@ -28,38 +28,7 @@
             padding: 0; /* Remove padding */
         }
 
-        /* Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0; /* Ensure it starts from the left edge */
-            width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(26, 26, 26, 0.9);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            animation: slideDown 0.5s ease;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            color: var(--accent-purple);
-            font-weight: 700;
-        }
-
-        nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--accent-purple);
-        }
+        
 
         /* Adjusted library-header margin */
         .library-header {
@@ -199,6 +168,11 @@
 <body>
     <header>
         <div class="logo">TAeOH テオ 📸</div>
+        <button class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <nav>
             <a href="index.html">Home</a>
             <a href="song.html">Songs</a>
@@ -309,6 +283,30 @@
         document.querySelectorAll('.song-card').forEach(card => {
             const title = card.querySelector('.song-title').textContent.toLowerCase();
             card.style.display = title.includes(searchTerm) ? 'block' : 'none';
+        });
+    });
+        // Mobile menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        }
+    });
+
+    // Close menu after clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
         });
     });
     </script>
