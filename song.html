@@ -43,12 +43,12 @@
       color: #9b59b6;
       font-weight: 700;
     }
-    /* Hamburger is shown only on mobile */
+    /* Hamburger: Hidden on PC, shown on mobile */
     .hamburger {
       cursor: pointer;
       background: none;
       border: none;
-      display: none; /* Hidden by default; will be enabled on mobile */
+      display: none;
       flex-direction: column;
       justify-content: space-around;
       height: 24px;
@@ -60,7 +60,7 @@
       height: 3px;
       width: 100%;
       margin: 2px 0;
-      transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
     nav {
       display: flex;
@@ -81,6 +81,7 @@
       padding: 2rem;
       margin-top: 80px; /* extra space for fixed header */
       margin-bottom: 2rem;
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .vtuber-title {
       font-size: 2.5rem;
@@ -112,11 +113,18 @@
       background: var(--card-bg);
       border-radius: 10px;
       overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease;
       position: relative;
       border: 1px solid #2d1433;
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s ease, border-color 0.3s ease, opacity 0.6s ease;
+      /* Initial state for animation */
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .song-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .song-card:hover {
       transform: translateY(-5px);
@@ -186,12 +194,12 @@
       font-size: 0.9rem;
       opacity: 0.8;
     }
-    /* ── ANIMATIONS ─────────────────────────────────────────── */
+    /* ── ANIMATIONS ───────────────────────────────────────────── */
     @keyframes slideDown {
       from { transform: translateY(-100%); }
       to { transform: translateY(0); }
     }
-    /* ── MOBILE-SPECIFIC STYLES ─────────────────────────────── */
+    /* ── MOBILE-SPECIFIC STYLES ───────────────────────────────── */
     @media (max-width: 768px) {
       .hamburger {
         display: flex;
@@ -209,7 +217,7 @@
       .play-overlay {
         display: none;
       }
-      /* Drop-down nav on mobile */
+      /* Drop-down navigation on mobile */
       nav {
         display: none;
         flex-direction: column;
@@ -236,7 +244,6 @@
       }
     }
     @media (min-width: 769px) {
-      /* On PC, hide the hamburger and show the nav inline */
       .hamburger {
         display: none;
       }
@@ -280,13 +287,11 @@
       <a href="about.html">About</a>
     </nav>
   </header>
-
   <!-- LIBRARY HEADER & SEARCH -->
   <div class="library-header">
     <h1 class="vtuber-title">🎵 TAeOH Music Library</h1>
     <input type="text" class="search-bar" placeholder="Search songs...">
   </div>
-
   <!-- SONG GRID -->
   <div class="song-grid">
     <!-- Song 1 -->
@@ -373,12 +378,9 @@
         <div class="song-duration">3:52</div>
       </div>
     </div>
-    <!-- Add more song cards as needed -->
   </div>
-
-  <!-- ── JAVASCRIPT ───────────────────────────────────────────── -->
   <script>
-    // Search functionality (filters songs by title)
+    // Search functionality: Filter songs by title
     document.querySelector('.search-bar').addEventListener('input', function(e) {
       const searchTerm = e.target.value.toLowerCase().trim();
       document.querySelectorAll('.song-card').forEach(card => {
@@ -394,19 +396,29 @@
       hamburger.classList.toggle('active');
       nav.classList.toggle('active');
     });
-    // Close menu when clicking outside the header
     document.addEventListener('click', (e) => {
       if (!header.contains(e.target)) {
         hamburger.classList.remove('active');
         nav.classList.remove('active');
       }
     });
-    // Close menu after clicking a nav link
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         nav.classList.remove('active');
       });
+    });
+    // Intersection Observer for smooth fade-in animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.library-header, .song-card').forEach(el => {
+      observer.observe(el);
     });
   </script>
 </body>
