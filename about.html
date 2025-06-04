@@ -4,286 +4,520 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About TAeOH</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Global Styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
     body {
-      background-color: #1a1a1a;
+      background: linear-gradient(135deg, #0a0410, #1a0c25);
       color: white;
       overflow-x: hidden;
+      min-height: 100vh;
     }
-    /* Header (Menu) */
+    
+    /* Header Styles */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 1.5rem 5%;
-      background: rgba(26, 26, 26, 0.9);
+      padding: 1.2rem 5%;
+      background: rgba(26, 13, 37, 0.95);
       backdrop-filter: blur(10px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
       animation: slideDown 0.5s ease;
+      border-bottom: 1px solid rgba(155, 89, 182, 0.3);
     }
+    
     .logo {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: #9b59b6;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    
+    .logo i {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    
     nav a {
       color: white;
       text-decoration: none;
-      margin-left: 2rem;
-      transition: color 0.3s ease;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
     }
+    
     nav a:hover {
       color: #9b59b6;
     }
-    @keyframes slideDown {
-      from {
-        transform: translateY(-100%);
-      }
-      to {
-        transform: translateY(0);
-      }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #9b59b6;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
     }
-    /* Hamburger (Mobile Only) */
+    
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
     .hamburger {
-      cursor: pointer;
+      display: none;
       background: none;
       border: none;
-      display: none;
-      flex-direction: column;
-      justify-content: space-around;
-      height: 24px;
-      width: 30px;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
     }
+    
     .hamburger span {
-      background: white;
       display: block;
+      width: 25px;
       height: 3px;
-      width: 100%;
-      margin: 2px 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      background: white;
+      margin: 5px 0;
+      transition: all 0.3s ease;
     }
-    /* Vtuber Hero Section */
+    
+    /* Hero Section */
     .vtuber-hero {
       height: 100vh;
-      background: linear-gradient(45deg, #2d1433, #491a54);
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-top: 80px;
-      animation: fadeIn 1s ease-out, gradientShift 10s infinite alternate;
+      position: relative;
+      overflow: hidden;
+      padding: 0 5%;
     }
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      100% {
-        background-position: 100% 50%;
-      }
+    
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
     }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 20px;
+    }
+    
     .vtuber-hero h1 {
-      font-size: 3.5em;
-      margin-bottom: 20px;
-      transform: translateY(30px);
-      opacity: 0;
-      animation: slideUp 0.8s ease forwards;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s ease;
+      text-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
       background: linear-gradient(45deg, #9b59b6, #e0b0ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+    
     .vtuber-hero p {
-      font-size: 1.5em;
-      color: rgba(255, 255, 255, 0.9);
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      margin-bottom: 2.5rem;
       animation: fadeUp 1s 0.2s ease backwards;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(255, 255, 255, 0.9);
     }
+    
     .vtuber-image {
-      width: 400px;
-      margin-top: 2rem;
-      animation: float 3s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
-    }
+  width: 100%;
+  max-width: 1200px;
+  height: 400px;
+  margin: 2rem auto;
+  background: url('./images/Body.jpg') center/cover no-repeat;
+  border-radius: 1rem;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+  animation: float 8s ease-in-out infinite;
+}
+
+
+    
     /* Timeline Section */
+    .timeline-section {
+      padding: 6rem 5%;
+      position: relative;
+    }
+    
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      text-align: center;
+      margin-bottom: 4rem;
+      color: #9b59b6;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 4px;
+      background: #9b59b6;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
     .timeline-container {
       position: relative;
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      /* Replace with your desired background image */
-      background: url('images/timelines.png') center/cover no-repeat;
-      overflow: hidden;
+      max-width: 1000px;
+      margin: 0 auto;
     }
-    /* Canvas for star drop particle animation */
-    #particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
+    
     .timeline-line {
       position: absolute;
       left: 50%;
       width: 4px;
       height: 100%;
-      background: #9b59b6;
-      transform: translateX(-35%);
+      background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+      transform: translateX(-50%);
       animation: drawLine 2s ease-out forwards;
+      z-index: 1;
     }
-    @keyframes drawLine {
-      0% {
-        height: 0;
-      }
-      100% {
-        height: 100%;
-      }
+    
+    .timeline-items {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
     }
+    
     .timeline-item {
       background: rgba(45, 45, 45, 0.7);
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-      margin: 40px 0;
-      width: 45%;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.4s ease;
+      transition: all 0.6s ease;
       backdrop-filter: blur(10px);
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      z-index: 2;
+      width: calc(50% - 40px);
     }
-    /* Alternate timeline item positioning */
+    
     .timeline-item:nth-child(odd) {
-      margin-left: 55%;
+      align-self: flex-start;
     }
+    
     .timeline-item:nth-child(even) {
-      margin-right: 55%;
+      align-self: flex-end;
     }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: #9b59b6;
+      border-radius: 50%;
+      top: 30px;
+      box-shadow: 0 0 0 8px rgba(155, 89, 182, 0.2);
+    }
+    
+    .timeline-item:nth-child(odd)::before {
+      right: -40px;
+    }
+    
+    .timeline-item:nth-child(even)::before {
+      left: -40px;
+    }
+    
+    .timeline-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #e0b0ff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .timeline-item p {
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+    }
+    
+    .timeline-date {
+      display: inline-block;
+      background: rgba(155, 89, 182, 0.3);
+      color: #e0b0ff;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
     .timeline-item.active {
       opacity: 1;
       transform: translateY(0);
     }
-    .timeline-item:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    
+    /* Feature Section */
+    .feature-section {
+      padding: 6rem 5%;
+      background: linear-gradient(135deg, #1a0c25, #0a0410);
+      position: relative;
     }
-    @media (max-width: 768px) {
-      .timeline-item {
-        width: 90%;
-        margin: 20px auto;
-      }
-    }
-    /* Feature Grid Section */
+    
     .feature-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      padding: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
+    
     .feature-card {
       background: rgba(45, 45, 45, 0.7);
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 15px;
+      padding: 30px;
       text-align: center;
-      transform: scale(0.95);
+      transform: translateY(30px);
       opacity: 0;
-      transition: all 0.4s ease;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.6s ease;
       backdrop-filter: blur(10px);
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      position: relative;
+      overflow: hidden;
     }
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(155, 89, 182, 0.2);
+      border-radius: 50%;
+      top: -50px;
+      right: -50px;
     }
+    
     .feature-card.active {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0);
     }
+    
     .feature-icon {
-      font-size: 2em;
-      margin-bottom: 1rem;
-      /* Removed star emoji; icons can be added via images or CSS if desired */
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: #9b59b6;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
     }
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    
+    .feature-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #e0b0ff;
     }
+    
+    .feature-card p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      background: rgba(155, 89, 182, 0.1);
+    }
+    
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 3rem 5%;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(155, 89, 182, 0.3);
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(155, 89, 182, 0.2);
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: #9b59b6;
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    /* Animations */
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    
     @keyframes fadeUp {
-      from {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes drawLine {
+      0% { height: 0; }
+      100% { height: 100%; }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .vtuber-image {
+        width: 250px;
+        height: 350px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        margin-left: 40px;
+      }
+      
+      .timeline-item:nth-child(odd)::before,
+      .timeline-item:nth-child(even)::before {
+        left: -35px;
+        right: auto;
+      }
+      
+      .timeline-line {
+        left: 20px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        background: rgba(26, 13, 37, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        transition: right 0.4s ease;
+        padding: 2rem;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      .hamburger {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .hamburger.active span:nth-child(2) {
         opacity: 0;
       }
-      to {
-        opacity: 1;
+      
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
       }
     }
-    /* Mobile Menu Responsive Adjustments */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
+    
+    @media (max-width: 480px) {
+      .vtuber-hero h1 {
+        font-size: 2.2rem;
       }
-      nav {
-        display: none;
-        flex-direction: column;
-        background: rgba(26, 26, 26, 0.9);
-        position: absolute;
-        top: 60px;
-        right: 10px;
-        padding: 1rem;
-        border: 1px solid #9b59b6;
-        border-radius: 5px;
+      
+      .vtuber-hero p {
+        font-size: 1.1rem;
       }
-      nav.active {
-        display: flex;
+      
+      .section-title {
+        font-size: 1.8rem;
       }
-      nav a {
-        width: 100%;
-        text-align: center;
-        padding: 1.2rem 0;
-        margin: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      nav a:last-child {
-        border-bottom: none;
-      }
-    }
-    @media (min-width: 769px) {
-      .hamburger {
-        display: none;
-      }
-      nav {
-        display: flex !important;
+      
+      .timeline-item {
+        padding: 20px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header (Menu) -->
+  <!-- Header -->
   <header>
-    <div class="logo">TAeOH テオ 📸</div>
+    <div class="logo"><i class="fas fa-camera"></i> TAeOH テオ</div>
     <button class="hamburger">
       <span></span>
       <span></span>
@@ -296,154 +530,163 @@
       <a href="about.html">About</a>
     </nav>
   </header>
-  <!-- Vtuber Hero Section -->
+
+  <!-- Hero Section -->
   <section class="vtuber-hero">
+    <div id="particles-js"></div>
     <div class="hero-content">
       <h1>About TAeOH</h1>
       <p>คุณพร้อมเป็นส่วนหนึ่งในเรื่องราวของผมหรือยังครับ? 🤭</p>
-      <img src="images/vtuber-about.png" alt="TAeOH Model" class="vtuber-image" />
+      <div class="vtuber-image"></div>
     </div>
   </section>
-  <!-- Timeline Section with Particle Background -->
-  <div class="timeline-container">
-    <!-- Canvas for star drop particles -->
-    <canvas id="particles"></canvas>
-    <div class="timeline-line"></div>
-    
-    <div class="timeline-item">
-      <h3>2021 -</h3>
-      <p>First milestone achieved.</p>
+
+  <!-- Timeline Section -->
+  <section class="timeline-section">
+    <h2 class="section-title">My Journey</h2>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div class="timeline-items">
+        <div class="timeline-item">
+          <span class="timeline-date">2021</span>
+          <h3><i class="fas fa-seedling"></i> The Beginning</h3>
+          <p>My journey as a VTuber started with a simple idea - to create a digital persona that could connect with people around the world. I designed my first model and started streaming on YouTube.</p>
+          <p>At first, it was just me and a few viewers, but we quickly formed a small community of like-minded individuals.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-date">2022</span>
+          <h3><i class="fas fa-microphone-alt"></i> First Original Song</h3>
+          <p>After months of preparation, I released my first original song "Starlight Dreams". The response was overwhelming, with over 100k views in the first week.</p>
+          <p>This marked a turning point in my career as I began focusing more on music creation alongside streaming.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-date">2023</span>
+          <h3><i class="fas fa-users"></i> Community Growth</h3>
+          <p>My community grew to over 50,000 subscribers across platforms. I launched my first merchandise line which sold out within 24 hours.</p>
+          <p>I also collaborated with other popular VTubers, expanding my reach and creating unique content for my fans.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-date">2024</span>
+          <h3><i class="fas fa-globe-asia"></i> International Recognition</h3>
+          <p>This year marked my first international tour with virtual concerts in Japan, Thailand, and South Korea. I released my first EP "Digital Heart" which charted in multiple countries.</p>
+          <p>I'm currently working on a new model with advanced tracking for more expressive performances.</p>
+        </div>
+      </div>
     </div>
-    <div class="timeline-item">
-      <h3>2022 -</h3>
-      <p>Full-automation launched.</p>
+  </section>
+
+  <!-- Feature Section -->
+  <section class="feature-section">
+    <h2 class="section-title">What Makes Me Unique</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎭</div>
+        <h3>Expressive Persona</h3>
+        <p>My character is designed with a rich backstory and personality that shines through in every stream and interaction.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎤</div>
+        <h3>Musical Talent</h3>
+        <p>With a background in music, I create original songs that blend traditional Thai elements with modern electronic sounds.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Community Focus</h3>
+        <p>My community "Starlight Dreamers" is at the heart of everything I do. I prioritize interaction and create content based on their suggestions.</p>
+      </div>
     </div>
-    <div class="timeline-item">
-      <h3>2023 -</h3>
-      <p>Interactive experiences.</p>
+  </section>
+
+  <footer>
+    <div class="social-links">
+      <a href="https://www.youtube.com/c/TAeOH" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
     </div>
-  </div>
-  <!-- Feature Grid Section -->
-  <h2 style="text-align: center; margin: 50px 0;">Key Features</h2>
-  <div class="feature-grid">
-    <div class="feature-card">
-      <h3>1</h3>
-      <p>Advanced Technology</p>
-    </div>
-    <div class="feature-card">
-      <h3>2</h3>
-      <p>Seamless Interaction</p>
-    </div>
-    <div class="feature-card">
-      <h3>3</h3>
-      <p>Immersive Experiences</p>
-    </div>
-  </div>
+    <p class="copyright">© 2023 TAeOH テオ. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Intersection Observer for timeline & feature animations
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    const featureCards = document.querySelectorAll('.feature-card');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+    
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+    
+    // Close menu when clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+    
+    // Particles.js configuration
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 100, density: { enable: true, value_area: 800 } },
+        color: { value: "#9b59b6" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#8e44ad",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        }
+      }
+    });
+    
+    // Scroll animations
+    const animateOnScroll = () => {
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      const featureCards = document.querySelectorAll('.feature-card');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target);
+            entry.target.classList.add('active');
           }
         });
-      },
-      { threshold: 0.5 }
-    );
-    timelineItems.forEach((item) => observer.observe(item));
-    featureCards.forEach((card) => observer.observe(card));
-
-    // Mobile Menu Functionality
-    const hamburger = document.querySelector(".hamburger");
-    const nav = document.querySelector("nav");
-    const header = document.querySelector("header");
-    hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("active");
-      nav.classList.toggle("active");
-    });
-    document.addEventListener("click", (e) => {
-      if (!header.contains(e.target)) {
-        hamburger.classList.remove("active");
-        nav.classList.remove("active");
-      }
-    });
-    document.querySelectorAll("nav a").forEach((link) => {
-      link.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        nav.classList.remove("active");
-      });
-    });
-
-    // Enhanced Star Drop Particle Animation behind Timeline
-    const canvas = document.getElementById("particles");
-    const ctx = canvas.getContext("2d");
-    function resizeCanvas() {
-      canvas.width = canvas.parentElement.offsetWidth;
-      canvas.height = canvas.parentElement.offsetHeight;
-    }
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+      }, { threshold: 0.3 });
+      
+      timelineItems.forEach(item => observer.observe(item));
+      featureCards.forEach(card => observer.observe(card));
+    };
     
-    // Create particles with properties for star shape and rotation
-    const particles = [];
-    const numParticles = 120;
-    for (let i = 0; i < numParticles; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 1, // slightly larger for a star effect
-        speed: Math.random() * 0.5 + 0.3,
-        opacity: Math.random() * 0.5 + 0.5,
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: Math.random() * 0.02 - 0.01,
-      });
-    }
-    
-    // Function to draw a star shape
-    function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius, rotation, fillStyle) {
-      let rot = rotation;
-      const step = Math.PI / spikes;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - outerRadius);
-      for (let i = 0; i < spikes; i++) {
-        ctx.lineTo(cx + Math.cos(rot) * outerRadius, cy + Math.sin(rot) * outerRadius);
-        rot += step;
-        ctx.lineTo(cx + Math.cos(rot) * innerRadius, cy + Math.sin(rot) * innerRadius);
-        rot += step;
-      }
-      ctx.closePath();
-      ctx.fillStyle = fillStyle;
-      ctx.fill();
-    }
-    
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.y += p.speed;
-        p.rotation += p.rotationSpeed;
-        if (p.y > canvas.height) {
-          p.y = 0 - p.size * 3;
-          p.x = Math.random() * canvas.width;
-        }
-        // Draw each particle as a star with 5 spikes
-        drawStar(
-          ctx,
-          p.x,
-          p.y,
-          5,
-          p.size * 3,
-          p.size * 1.5,
-          p.rotation,
-          "rgba(255,255,255," + p.opacity + ")"
-        );
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      animateOnScroll();
+    });
   </script>
 </body>
 </html>
